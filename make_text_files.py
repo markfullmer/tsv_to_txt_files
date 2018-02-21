@@ -16,19 +16,23 @@ for row in input_file:
     url = re.sub(r"\n", "", row_elements[5])
     page = urllib.request.urlopen(url).read()
     page_json = json.loads(page.decode('utf-8'))
-    for element in page_json:
-        text += element["text"] + " "
+    try:
+        for element in page_json:
+            text += element["text"] + " "
 
-    text = re.sub(r"\n", " ", text)
-    text = re.sub(r"\s+", " ", text)
+        text = re.sub(r"\n", " ", text)
+        text = re.sub(r"\s+", " ", text)
 
-    output_file = open(path + row_elements[0] + "_" + row_elements[1] + "_" + row_elements[2] + "_" + row_elements[3] + "_" + row_elements[4]+".txt","w")
-    output_file.write("<doc discipline=" + '"' + row_elements[0] + '"' + " ")
-    output_file.write("sub_discipline=" + '"' + row_elements[1] + '"' + " ")
-    output_file.write("topic=" + '"' + row_elements[2] + '"' + " ")
-    output_file.write("author=" + '"' + row_elements[3] + '"' + " ")
-    output_file.write("video_title=" + '"' + row_elements[4] + '"' + " ")
-    output_file.write("transcript_url=" + '"' + url + '"' + ">\r\n")
-    output_file.write(text)
-    output_file.write("\r\n</doc>")
-    output_file.close()
+        output_file = open(path + row_elements[0] + "_" + row_elements[1] + "_" + row_elements[2] + "_" + row_elements[3] + "_" + row_elements[4]+".txt","w")
+        output_file.write("<doc discipline=" + '"' + row_elements[0] + '"' + " ")
+        output_file.write("sub_discipline=" + '"' + row_elements[1] + '"' + " ")
+        output_file.write("topic=" + '"' + row_elements[2] + '"' + " ")
+        output_file.write("author=" + '"' + row_elements[3] + '"' + " ")
+        output_file.write("video_title=" + '"' + row_elements[4] + '"' + " ")
+        output_file.write("transcript_url=" + '"' + url + '"' + ">\r\n")
+        output_file.write(text)
+        output_file.write("\r\n</doc>")
+        output_file.close()
+    except:
+        print("Item # " + row_elements[4] + " from " + url + " was not able to be parsed, and was skipped.")
+        pass
