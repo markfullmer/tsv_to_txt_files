@@ -4,11 +4,15 @@
 import sys
 import re
 import json
+import os
 from bs4 import BeautifulSoup
 import urllib.request
 
 input_file = open("sample.tsv", "r")
 path = "all_transcriptsUND/"
+
+if not os.path.exists(path):
+    os.makedirs(path)
 
 for row in input_file:
     text = ''
