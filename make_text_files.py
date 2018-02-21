@@ -8,7 +8,12 @@ import os
 from bs4 import BeautifulSoup
 import urllib.request
 
-input_file = open("sample.tsv", "r")
+filename = input("Enter the tab-separated filename to import:")
+if not os.path.exists(filename):
+    print("The file " + filename + " doesn't exist in the location specified. Try again?")
+    sys.exit()
+
+input_file = open(filename, "r")
 path = "all_transcriptsUND/"
 
 if not os.path.exists(path):
@@ -27,7 +32,7 @@ for row in input_file:
         text = re.sub(r"\n", " ", text)
         text = re.sub(r"\s+", " ", text)
 
-        output_file = open(path + row_elements[0] + "_" + row_elements[1] + "_" + row_elements[2] + "_" + row_elements[3] + "_" + row_elements[4]+".txt","w")
+        output_file = open(path + row_elements[0] + "_" + row_elements[1] + "_" + row_elements[2] + "_" + row_elements[3] + "_" + row_elements[4]+".txt", "w")
         output_file.write("<doc discipline=" + '"' + row_elements[0] + '"' + " ")
         output_file.write("sub_discipline=" + '"' + row_elements[1] + '"' + " ")
         output_file.write("topic=" + '"' + row_elements[2] + '"' + " ")
