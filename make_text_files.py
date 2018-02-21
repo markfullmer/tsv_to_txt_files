@@ -32,7 +32,9 @@ for row in input_file:
         text = re.sub(r"\n", " ", text)
         text = re.sub(r"\s+", " ", text)
 
-        output_file = open(path + row_elements[0] + "_" + row_elements[1] + "_" + row_elements[2] + "_" + row_elements[3] + "_" + row_elements[4]+".txt", "w")
+        output_filename = row_elements[0] + "_" + row_elements[1] + "_" + row_elements[2] + "_" + row_elements[3] + "_" + row_elements[4]+".txt"
+        output_file = os.path.join(path, output_filename)
+        output_file = open(output_file, "w")
         output_file.write("<doc discipline=" + '"' + row_elements[0] + '"' + " ")
         output_file.write("sub_discipline=" + '"' + row_elements[1] + '"' + " ")
         output_file.write("topic=" + '"' + row_elements[2] + '"' + " ")
