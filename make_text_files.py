@@ -7,7 +7,7 @@ import json
 from bs4 import BeautifulSoup
 import urllib.request
 
-input_file = open("KhanAcademy_UnDup.tsv", "r")
+input_file = open("sample.tsv", "r")
 path = "all_transcriptsUND/"
 
 for row in input_file:
